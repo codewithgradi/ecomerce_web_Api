@@ -1,4 +1,4 @@
-public class Variants
+public class Variant
 {
   public int Id { get; set; }
   public int ProductId { get; set; }

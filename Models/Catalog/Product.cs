@@ -7,5 +7,6 @@ public class Product
 
   public Category? Category { get; set; }
 
-  public ICollection<Variants> Variants { get; set; } = new List<Variants>();
+  public ICollection<Variant> Variants { get; set; }
+   = new List<Variant>();
 }

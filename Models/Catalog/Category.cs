@@ -4,7 +4,8 @@ public class Category
   public string? Slug { get; set; }//for url like /kitchen-applience-frontend
   public string? DisplayName { get; set; }
 
-  //Allows easy query like category.Products
-  public ICollection<Product> Products { get; set; } = new List<Product>();
+  //Allows easy query like category.Products 
+  public ICollection<Product> Products { get; set; }
+   = new List<Product>();
 
 }
