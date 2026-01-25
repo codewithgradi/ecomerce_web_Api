@@ -60,6 +60,7 @@ public static class ServiceExtensions
         ValidIssuer = configuration["JWT:Issuer"],
         ValidateAudience = true,
         ValidAudience = configuration["JWT:Audience"],
+        ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(
       System.Text.
       Encoding.UTF8

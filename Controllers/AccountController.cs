@@ -29,7 +29,7 @@ public class AccountController : ControllerBase
         Email = user.Email,
         UserName = user.Email
       };
-      var createUser = await _userManager.CreateAsync(appUser, user.PasswordHash!);
+      var createUser = await _userManager.CreateAsync(appUser, user.Password!);
       if (!createUser.Succeeded) return StatusCode(500, createUser.Errors);
       var roleResult = await _userManager.AddToRoleAsync(appUser, "User");
       if (!roleResult.Succeeded) return StatusCode(500, roleResult.Errors);
@@ -83,7 +83,6 @@ public class AccountController : ControllerBase
     {
       return StatusCode(500, e);
     }
-    ;
   }
   [HttpPost("logout")]
   [Authorize]
@@ -105,7 +104,6 @@ public class AccountController : ControllerBase
     if (tokenRequest == null) return BadRequest("Invalid Client Request");
     var user = await _userManager.Users.FirstOrDefaultAsync(u => u.RefreshToken == tokenRequest.RefreshToken);
     if (user == null || user.RefreshTokenExpiryTime <= DateTime.UtcNow) return Unauthorized("Invalid or expired refresh token");
-
     //New tokens
     var newAccesstoken = _tokenService.CreateToken(user);
     var newRefreshToken = _tokenService.GenerateRefreshToken();
