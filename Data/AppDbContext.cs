@@ -21,7 +21,7 @@ public class AppDbContext : IdentityDbContext<AppUser>
     builder.Entity<Product>()
     .HasOne(p => p.Category)
     //for ICollection<Product>
-    .WithMany(c => Products)
+    .WithMany(c => c.Products)
     .HasForeignKey(p => p.CategoryId)
     //prevents accidental category deletion
     .OnDelete(DeleteBehavior.Restrict);
@@ -39,18 +39,19 @@ public class AppDbContext : IdentityDbContext<AppUser>
     //Identity Roles
     List<IdentityRole> roles = new List<IdentityRole>
     {
-      new IdentityRole
-      {
-        Name="Admin",
-        NormalizedName="ADMIN"
-      },
-      new IdentityRole
-      {
-        Name="User",
-        NormalizedName="USER"
-      }
+        new IdentityRole
+        {
+            Id = "fab4fac1-c546-41de-aebc-a14da401b7e4", // Static GUID
+            Name = "Admin",
+            NormalizedName = "ADMIN"
+        },
+        new IdentityRole
+        {
+            Id = "c7b013f0-5201-4317-abd8-c211f91b7330", // Static GUID
+            Name = "User",
+            NormalizedName = "USER"
+        }
     };
     builder.Entity<IdentityRole>().HasData(roles);
-
   }
 }

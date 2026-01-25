@@ -1,5 +1,6 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 
@@ -18,6 +19,7 @@ public class TokenService : ITokenService
   {
     var claims = new List<Claim>
     {
+      new Claim(JwtRegisteredClaimNames.NameId,user.Id),
       new Claim(JwtRegisteredClaimNames.Email,user.Email),
       new Claim(JwtRegisteredClaimNames.GivenName,user.UserName),
     };
@@ -26,7 +28,7 @@ public class TokenService : ITokenService
     var tokenDescriptor = new SecurityTokenDescriptor
     {
       Subject = new ClaimsIdentity(claims),
-      Expires = DateTime.Now.AddDays(7),
+      Expires = DateTime.Now.AddMinutes(60),
       SigningCredentials = creds,
       Issuer = _config["JWT:Issuer"],
       Audience = _config["JWT:Audience"]
@@ -35,6 +37,13 @@ public class TokenService : ITokenService
     var tokenHandler = new JwtSecurityTokenHandler();
     var token = tokenHandler.CreateToken(tokenDescriptor);
     return tokenHandler.WriteToken(token);
+  }
+  public string GenerateRefreshToken()
+  {
+    var randomNumber = new byte[64];
+    using var rng = RandomNumberGenerator.Create();
+    rng.GetBytes(randomNumber);
+    return Convert.ToBase64String(randomNumber);
   }
 
 }

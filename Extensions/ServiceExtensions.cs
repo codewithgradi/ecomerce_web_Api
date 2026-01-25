@@ -4,14 +4,21 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
-
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 public static class ServiceExtensions
 {
   public static void ConfigurationSqlContext(this IServiceCollection services, IConfiguration configuration)
   {
     services.AddDbContext<AppDbContext>(options =>
-      options.UseSqlServer(configuration.GetConnectionString("DevDB"))
+    {
+      options.UseSqlServer(configuration.GetConnectionString
+       ("DevDB"));
+      options.ConfigureWarnings
+      (w => w.Ignore(RelationalEventId.PendingModelChangesWarning));
+    }
+
+
     );
   }
 

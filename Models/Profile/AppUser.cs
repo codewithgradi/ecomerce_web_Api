@@ -8,5 +8,5 @@ public class AppUser : IdentityUser
 
   //Token Refresh
   public string? RefreshToken { get; set; }
-  public DateTime RefreshTokenExpiryTime { get; set; }
+  public DateTime? RefreshTokenExpiryTime { get; set; }
 }
