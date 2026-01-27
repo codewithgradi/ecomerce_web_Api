@@ -1,3 +1,4 @@
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -88,14 +89,17 @@ public class AccountController : ControllerBase
   [Authorize]
   public async Task<IActionResult> Logout()
   {
-    //From claims
-    var email = User.FindFirstValue(ClaimTypes.Email);
-    var user = await _userManager.FindByEmailAsync(email!);
-    if (user == null) return Unauthorized();
+    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+    if (string.IsNullOrEmpty(userId)) return Unauthorized();
+
+    var user = await _userManager.FindByIdAsync(userId);
+    if (user == null) return NotFound("User not found in DB");
+
     user.RefreshToken = null;
     user.RefreshTokenExpiryTime = null;
     await _userManager.UpdateAsync(user);
-    return Ok("user logged out.");
+
+    return Ok("Logged out");
   }
 
   [HttpPost("refresh")]
