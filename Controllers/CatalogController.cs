@@ -50,6 +50,7 @@ public class CatalogController : ControllerBase
   public async Task<IActionResult> Create([FromRoute] CreateProductDto createProduct)
   {
     if (!ModelState.IsValid) return BadRequest(ModelState);
+
     var product = await _cataloRepo.CreateAsync(createProduct);
     if (product == null) return BadRequest("Product not valid");
     return CreatedAtAction(nameof(GetOne), new { id = product.Id }, product);

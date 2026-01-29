@@ -12,6 +12,7 @@ public class AppDbContext : IdentityDbContext<AppUser>
   public DbSet<Product> Products { get; set; }
   public DbSet<Category> Categories { get; set; }
   public DbSet<Variant> Variants { get; set; }
+  public DbSet<Review> Reviews { get; set; }
 
   protected override void OnModelCreating(ModelBuilder builder)
   {
@@ -34,6 +35,11 @@ public class AppDbContext : IdentityDbContext<AppUser>
     .HasForeignKey(v => v.ProductId)
     //deletes product and its variants
     .OnDelete(DeleteBehavior.Cascade);
+
+    builder.Entity<Review>()
+    .HasOne(c => c.AppUser)
+    .WithMany(c => c.Reviews)
+    .HasForeignKey(c => c.UserId);
 
 
     //Identity Roles

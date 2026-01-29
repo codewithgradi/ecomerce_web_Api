@@ -9,4 +9,5 @@ public class AppUser : IdentityUser
   //Token Refresh
   public string? RefreshToken { get; set; }
   public DateTime? RefreshTokenExpiryTime { get; set; }
+  public ICollection<Review> Reviews { get; set; } = new List<Review> { };
 }
