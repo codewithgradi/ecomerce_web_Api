@@ -9,4 +9,6 @@ public class Product
 
   public ICollection<Variant> Variants { get; set; }
    = new List<Variant>();
+
+  public ICollection<Review> Reviews { get; set; } = new List<Review> { };
 }

@@ -7,7 +7,7 @@ public class CatalogRepo : ICatalogRepo
   private readonly AppDbContext _context;
   public CatalogRepo(AppDbContext context)
   {
-    using var _ = _context = context;
+    var _context = context;
   }
 
   public async Task<Product> CreateAsync(CreateProductDto createProduct)
