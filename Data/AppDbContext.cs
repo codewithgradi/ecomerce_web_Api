@@ -9,9 +9,9 @@ public class AppDbContext : IdentityDbContext<AppUser>
 
   }
   //Tables
-  DbSet<Product> Products { get; set; }
-  DbSet<Category> Categories { get; set; }
-  DbSet<Variant> Variants { get; set; }
+  public DbSet<Product> Products { get; set; }
+  public DbSet<Category> Categories { get; set; }
+  public DbSet<Variant> Variants { get; set; }
 
   protected override void OnModelCreating(ModelBuilder builder)
   {

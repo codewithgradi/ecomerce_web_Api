@@ -19,4 +19,18 @@ public static class CatalogMappers
       }).ToList()
     };
   }
+  public static Product ToProductFromCreate(this CreateProductDto productDto)
+  {
+    return new Product
+    {
+      Brand = productDto.Brand,
+      CategoryId = productDto.CategoryId,
+      Variants = productDto.Variants.Select(x => new Variant
+      {
+        Color = x.Color,
+        Price = x.Price,
+        StockQuantity = x.StockQuantity
+      }).ToList()
+    };
+  }
 }

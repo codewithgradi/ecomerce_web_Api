@@ -8,6 +8,5 @@ public class Variant
   public int StockQuantity { get; set; }
   public decimal Price { get; set; }
   public bool InStock { get; set; }
-
   public Product? Product { get; set; }
 }
