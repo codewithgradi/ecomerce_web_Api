@@ -4,6 +4,6 @@ public class Cart
   public string? UserId { get; set; }
   public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
   public DateTime UpdatedAt { get; set; }
-
+  public List<CartItem> CartItems { get; set; } = new List<CartItem>();
   public AppUser? AppUser { get; set; }
 }

@@ -13,6 +13,8 @@ public class AppDbContext : IdentityDbContext<AppUser>
   public DbSet<Category> Categories { get; set; }
   public DbSet<Variant> Variants { get; set; }
   public DbSet<Review> Reviews { get; set; }
+  public DbSet<Cart> Carts { get; set; }
+  public DbSet<CartItem> CartItems { get; set; }
 
   protected override void OnModelCreating(ModelBuilder builder)
   {
@@ -40,6 +42,14 @@ public class AppDbContext : IdentityDbContext<AppUser>
     .HasOne(c => c.AppUser)
     .WithMany(c => c.Reviews)
     .HasForeignKey(c => c.UserId);
+
+    builder.Entity<CartItem>()
+    .HasOne(c => c.Cart)
+    .WithMany(c => c.CartItems)
+    .HasForeignKey(c => c.CartId)
+    //cart deleted? then cartitems goes with it
+    .OnDelete(DeleteBehavior.Cascade)
+    ;
 
 
     //Identity Roles
