@@ -10,9 +10,10 @@ public class CartRepo : ICartRepo
   }
   public async Task<CartItem> AddItemToCartAsync(
     string userId,
-    CartItemDto cartItem,
-    int cartId, int variantId, int quantity,
-     int productId)
+    int cartId,
+    int variantId,
+    int quantity,
+    int productId)
   {
     var cart = await _context.Carts.FirstOrDefaultAsync(c => c.UserId == userId);
     if (cart == null)
@@ -42,10 +43,6 @@ public class CartRepo : ICartRepo
     return existingItem!;
   }
 
-  public async Task<bool> CartExist(string userId)
-  {
-    return await _context.Carts.AnyAsync(x => x.UserId == userId);
-  }
 
   public async Task<CartDto> DeleteCartAsync(string UserId)
   {

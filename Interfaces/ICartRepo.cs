@@ -4,7 +4,6 @@ public interface ICartRepo
   Task<CartDto> DeleteCartAsync(string UserId);
   Task<CartItem> AddItemToCartAsync(
     string userId,
-    CartItemDto cartItem,
     int cartId,
     int variantId,
     int quantity,
