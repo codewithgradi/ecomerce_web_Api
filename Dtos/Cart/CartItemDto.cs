@@ -1,5 +1,4 @@
-
-public class CartItem
+public class CartItemDto
 {
   public int Id { get; set; }
   public int CartId { get; set; }
@@ -8,6 +7,7 @@ public class CartItem
   public int Quantity { get; set; }
   public int Price { get; set; }
   public Cart? Cart { get; set; }
-  public Product? Product { get; set; }
+  public ProductResponse? ProductDetails { get; set; }
   public VariantDto? SelectedVariant { get; set; }
+  public Product? Product { get; set; }
 }
