@@ -17,15 +17,14 @@ public class ReviewRepo : IReviewRepo
 
   public async Task<List<Review>> GetAllAsync(string id)
   {
-    var reviews = _context.Reviews.Where(c => c.UserId == id);
-
-    if (reviews.Count < 0) return null;
-    return reviews.ToListAsync();
+    var reviews = await _context.Reviews.Where(c => c.UserId == id).ToListAsync();
+    if (reviews.Count == 0) return new List<Review>();
+    return reviews;
   }
 
   public async Task<Review> GetOneAsync(int id)
   {
-    var review = await _context.Reviews.FirstOrDefault(x => x.Id == id);
+    var review = await _context.Reviews.FirstOrDefaultAsync(x => x.Id == id);
     if (review == null) return null;
     return review;
   }
