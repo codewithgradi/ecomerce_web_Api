@@ -15,6 +15,9 @@ public class AppDbContext : IdentityDbContext<AppUser>
   public DbSet<Review> Reviews { get; set; }
   public DbSet<Cart> Carts { get; set; }
   public DbSet<CartItem> CartItems { get; set; }
+  public DbSet<Order> Orders { get; set; }
+  public DbSet<OrderItem> OrderItems { get; set; }
+  public DbSet<Payment> Payments { get; set; }
 
   protected override void OnModelCreating(ModelBuilder builder)
   {
@@ -51,6 +54,18 @@ public class AppDbContext : IdentityDbContext<AppUser>
     .OnDelete(DeleteBehavior.Cascade)
     ;
 
+    builder.Entity<OrderItem>()
+    .HasOne(c => c.Order)
+    .WithMany(c => c.OrderItems)
+    .HasForeignKey(c => c.OrderId)
+    .OnDelete(DeleteBehavior.Restrict);
+
+
+    //One to one relationships
+    builder.Entity<Payment>()
+    .HasOne(c => c.Order)
+    .WithOne(c => c.Payment)
+    .HasForeignKey<Payment>(c => c.OrderId);
 
     //Identity Roles
     List<IdentityRole> roles = new List<IdentityRole>

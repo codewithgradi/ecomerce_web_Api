@@ -2,7 +2,7 @@ public class Order
 {
   public int Id { get; set; }
   public string? OrderNumber { get; set; }//ORD-2024-001
-  public string? CustomerId { get; set; }
+  public string? CustomerId { get; set; }//app user
   public DateTime OrderDate { get; set; }
   public OrderStatus Status { get; set; }
   public decimal TotalAmount { get; set; }
@@ -10,6 +10,7 @@ public class Order
   public string? ShippingAddress { get; set; }
   public string? BillingAddress { get; set; }
   public ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
-
+  public AppUser? AppUser { get; set; }
+  public Payment? Payment { get; set; }
 }
 
