@@ -1,4 +1,4 @@
-public class Payment
+public class PaymentDto
 {
   public int Id { get; set; }
   public int? OrderId { get; set; }
@@ -8,6 +8,6 @@ public class Payment
   public decimal Amount { get; set; }
   public PaymentStatus PaymentStatus { get; set; }
   public PaymentProvider Provider { get; set; } = PaymentProvider.Stripe;
-  public Order? Order { get; set; }
+  public OrderDto? Order { get; set; }
   public string? Last4 { get; set; }//last four digits of card
 }

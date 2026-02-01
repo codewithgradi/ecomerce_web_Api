@@ -1,4 +1,4 @@
-public class Order
+public class OrderDto
 {
   public int Id { get; set; }
   public string? OrderNumber { get; set; }//ORD-2024-001
@@ -10,9 +10,8 @@ public class Order
   public Currency Currency { get; set; } = global::Currency.ZAR;
   public string? ShippingAddress { get; set; }
   public string? BillingAddress { get; set; }
-  public ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
+  public List<OrderItemDto> OrderItems { get; set; } = new List<OrderItemDto>();
   public AppUser? AppUser { get; set; }
-  public Payment? Payment { get; set; }
-
+  public PaymentDto? Payment { get; set; }
 }
 
